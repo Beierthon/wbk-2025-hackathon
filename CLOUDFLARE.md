@@ -30,3 +30,25 @@ PWA behavior, and custom-domain HTTPS before removing Vercel. Preview builds
 must stay disabled until access protection is configured.
 
 The Cloudflare build checks that production Supabase configuration is present. Local packaging was tested using explicit placeholder values; production authentication and data parity still require real configuration.
+
+## Cloudflare protection and logging baseline
+
+The active kevinbeier.com zone uses Full (strict) TLS, minimum TLS 1.2 and HTTPS
+redirects. Browser cache TTL is set to respect origin headers. Keep the free
+Managed WAF enabled and public custom domains accessible without a login gate.
+Browser Integrity Check is disabled only for the existing /api/, /assets/,
+/static/, /_next/, /_nuxt/ and /webhooks/ path prefixes; keep Managed WAF active
+on these paths. Do not enable blanket Bot Fight Mode. These are shared zone
+settings, not Wrangler application settings; deployments must not reset them.
+Keep nameservers and iCloud MX, DKIM and TXT records unchanged. Do not enable
+R2, paid plans or a registrar transfer, or delete Vercel projects.
+
+This Pages application uses Functions. Pages offers live function log streams,
+not the persisted Workers Logs configuration; do not add unsupported Worker-only
+observability keys to its Pages Wrangler configuration. Do not log query strings,
+tokens or request bodies. Existing Web Analytics and zone security settings remain.
+
+Before proxying wbk.2025.hackathon.kevinbeier.com, confirm that an active
+certificate covers this exact deeply nested hostname. The zone's usual wildcard
+certificate alone does not cover it. Do not buy a certificate product or switch
+DNS while certificate coverage or production checks are unresolved.
