@@ -1,7 +1,7 @@
 # Cloudflare Pages hosting
 
 Repository: `Beierthon/wbk-2025-hackathon`, production branch: `main`.
-Pages project: `kevinbeier-hackathon-2025`.
+Pages project: `com-kevinbeier-hackathon-2025-wbk`.
 Canonical domain: `wbk.2025.hackathon.kevinbeier.com`.
 
 Use Node 22 and pnpm 10.6.1. Build with `pnpm build:cloudflare`;
@@ -29,7 +29,7 @@ Verify Pages HTML, APIs, static files, image processing, dashboard authenticatio
 PWA behavior, and custom-domain HTTPS before removing Vercel. Preview builds
 must stay disabled until access protection is configured.
 
-The Cloudflare build checks that production Supabase configuration is present. Local packaging was tested using explicit placeholder values; production authentication and data parity still require real configuration.
+The Cloudflare build checks that production Supabase configuration is present. Local packaging was verified using the existing public production Supabase configuration; authenticated workflows still require a separate production smoke check.
 
 ## Cloudflare protection and logging baseline
 
@@ -52,3 +52,7 @@ Before proxying wbk.2025.hackathon.kevinbeier.com, confirm that an active
 certificate covers this exact deeply nested hostname. The zone's usual wildcard
 certificate alone does not cover it. Do not buy a certificate product or switch
 DNS while certificate coverage or production checks are unresolved.
+
+## Public production entry points
+
+Keep `main` as the production branch. The additional production `pages.dev` hostname redirects to the official custom domain, preserving path and query. Deployment-specific Pages URLs require Kevin's existing Cloudflare Access login; automatic preview deployments remain disabled. Do not remove the Access protection for the private Planner or Plutos services.
