@@ -1,3 +1,5 @@
+import process from 'node:process'
+
 import { pwa } from './app/config/pwa'
 import { appDescription } from './app/config/site'
 
@@ -33,6 +35,13 @@ export default defineNuxtConfig({
         { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
         { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' },
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+      ],
+      script: [
+        {
+          'src': 'https://static.cloudflareinsights.com/beacon.min.js',
+          'defer': true,
+          'data-cf-beacon': '{"token":"042d75339566430ea96243c5fcafbd79"}',
+        },
       ],
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -92,6 +101,10 @@ export default defineNuxtConfig({
   compatibilityDate: '2024-11-27',
 
   nitro: {
+    preset: process.env.CF_PAGES === '1' ? 'cloudflare-pages' : undefined,
+    cloudflare: {
+      nodeCompat: true,
+    },
     experimental: {
       openAPI: true,
     },
