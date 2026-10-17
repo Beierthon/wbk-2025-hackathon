@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "kevinbeier-hackathon-2025",
+  "pages_build_output_dir": "./dist",
+  "compatibility_date": "2026-10-13",
+  "compatibility_flags": ["nodejs_compat"],
+  "vars": {
+    "NODE_VERSION": "22",
+    "PNPM_VERSION": "10.6.1",
+    "NUXT_PUBLIC_SITE_URL": "https://wbk.2025.hackathon.kevinbeier.com"
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "kevinbeier-hackathon-2025-content",
+      "database_id": "c0813eb5-b5fe-47ea-87b0-fceac9896483"
+    }
+  ]
+}
